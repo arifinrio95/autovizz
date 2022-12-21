@@ -36,7 +36,7 @@ def sans(text, thread='datasans', show_script=False):
       output = response['choices'][0]['text']
       context = output
     except:
-      output = """print("Parameter thread belum diatur, jalankan chatGPT([text_anda], 'new_thread') ketika menjalankan fungsi untuk pertama kali atau ketika ingin mereset thread.")"""
+      output = """print("Parameter thread belum diatur, jalankan chatGPT([text_anda], thread='new') ketika menjalankan fungsi untuk pertama kali atau ketika ingin mereset thread.")"""
   
   if show_script==True:
     return exec(output), print('Script:', output)
