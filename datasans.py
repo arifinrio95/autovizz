@@ -1,4 +1,4 @@
-def sans(text, thread='datasans', show_script=False):
+def sans(text, thread='datasans', show_script=True, exc=True):
   """
   Anda harus menginstall library openai terlebih dahulu dengan cara "pip install openai"
   Untuk menjalankan fungsi pertama kali anda bisa meng-assign global variabel untuk api_key = [API-OpenAI-Anda], 
@@ -6,7 +6,8 @@ def sans(text, thread='datasans', show_script=False):
   
   thread: Untuk menjalankan thread baru, anda perlu meng-assign parameter thread='new' agar semua conversation sebelumnya direset. 
           Ini berguna jika anda baru pertama kali menggunakan fungsi ini atau jika anda ingin mengubah conversation untuk visualisasi/script yang baru
-  show_script: Anda juga bisa meminta agar fungsi ini menampilkan script yang digenerate dengan cara mengatur parameter show_script=True, secara default show_script=False
+  show_script: Anda juga bisa meminta agar fungsi ini menampilkan script yang digenerate dengan cara mengatur parameter show_script=True, secara default show_script=True
+  exc: Opsi untuk langsung mengeksekusi script
   """
   import openai
   global api_key
@@ -39,6 +40,12 @@ def sans(text, thread='datasans', show_script=False):
       output = """print("Parameter thread belum diatur, jalankan chatGPT([text_anda], thread='new') ketika menjalankan fungsi untuk pertama kali atau ketika ingin mereset thread.")"""
   
   if show_script==True:
-    return exec(output), print('Script:', output)
+    if exc==True:
+      return print('Script:', output), exec(output)
+    else:
+      return print('Script:', output)
   else:
-    return exec(output)
+    if exc==True:
+      return exec(output)
+    else:
+      return print('Script tidak dieksekusi maupun dishow, setting parameter show_script atau exc untuk menampilkan script atau mengeksekusi.')
